@@ -1,64 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Geanluis Lorenzo | Portfolio </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geanluis Lorenzo | Portfolio</title>
     <link rel="stylesheet" href="Css/style.css">
     <link rel="icon" href="https://img.icons8.com/material/24/under-computer--v1.png" type="image/x-icon"/>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <header class="header">
+   
+        <header class="header">
         <a href="https://geanluisgl.github.io/gy/" class="logo">Portfolio</a>
         <nav class="navbar">
             <ul class="nav-links">
-                <li> <a href="https://geanluisgl.github.io/gy/" style="--i:1" class="active">Home</a>
-                <li><a href="https://geanluisgl.github.io/about/" style="--i:2">About</a></li>
-                <li><a href="https://geanluisgl.github.io/skill/" style="--i:3">Skills</a></li>
-                <li><a href="https://geanluisgl.github.io/project/" style="--i:4">Projects</a></li>
-                <li><a href="https://geanluisgl.github.io/contact/" style="--i:5">Contact</a></li>  
+                <li><a href="https://geanluisgl.github.io/gy/" class="active">Home</a></li>
+                <li><a href="https://geanluisgl.github.io/about/">About</a></li>
+                <li><a href="https://geanluisgl.github.io/skill/" >Skills</a></li>
+                <li><a href="https://geanluisgl.github.io/project/">Projects</a></li>
+                <li><a href="https://geanluisgl.github.io/contact/">Contact</a></li>
             </ul>
-            <button type="submit" class="nav-toggle" aria-label="Abrir menú">
-                <i class='bx bx-list-ul' style="font-size: 2rem;"></i>
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                <i class='bx bx-moon'></i>
+            </button>
+            <button class="nav-toggle" aria-label="Abrir menú">
+                <i class='bx bx-menu' style="font-size: 2rem;"></i>
             </button>
         </nav>
     </header>
-    <br><br>
 
 
     <section class="home">
-     
-
-   <div class="home-content">
-        <h1>Hi, I'm Geanluis Lorenzo</h1><br>
-        <br><h3>Software Developer | SQL Developer | Interpreter </h3>
-        <p>I am a passionate and proactive developer, always ready to tackle new challenges with a positive attitude. I am driven by the desire to overcome obstacles and continuously grow, seeking innovative solutions and learning opportunities in every experience.</p>
-        <br>
-        <a href="https://geanluisgl.github.io/contact/" class="btn">Contact me</a>
-</div>
-
-<div class="home-img">
-    <div class="glowing-circle">
-        <span></span>
-        <span></span>
-        <div class="image">
-            <img src="Img/vdjc6nti.png" alt="">
+        <div class="home-content">
+            <h1>Hi, I'm Geanluis Lorenzo</h1>
+            <h3>Software Developer | SQL Developer | Interpreter</h3>
+            <p>I am a passionate and proactive developer, always ready to tackle new challenges with a positive attitude. I am driven by the desire to overcome obstacles and continuously grow, seeking innovative solutions and learning opportunities in every experience.</p>
+            <a href="img/CV_Geanluis_Lorenzo.pdf" class="btn" download="CV_Geanluis_Lorenzo.pdf">
+                <i class='bx bx-download' style="margin-right: 0.5rem;"></i> 
+                Read more details
+            </a>
         </div>
-    </div>
 
-    <div class="home-sci">
-        <a href="https://github.com/GeanluisGL"><i class='bx bxl-github'></i></a>
-        <a href="https://www.linkedin.com/in/geanluis-lorenzo-rodr%C3%ADguez-2337b2152/"><i class='bx bxl-linkedin-square' ></i></a>
-        <a href="https://www.instagram.com/20thdecade_yan/"><i class='bx bxl-instagram' ></i></a>
-    </div>
-
-</div>
-</section> 
+        <div class="home-img">
+            <div class="glowing-circle">
+                <span></span>
+                <span></span>
+                <div class="image">
+                    <img src="Img/Pic.png" alt="Geanluis Lorenzo">
+                </div>
+            </div>
+            <div class="home-sci">
+                <a href="https://github.com/GeanluisGL" target="_blank"><i class='bx bxl-github'></i></a>
+                <a href="https://www.linkedin.com/in/geanluis-lorenzo-rodr%C3%ADguez-2337b2152/" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://www.instagram.com/20thdecade_yan/" target="_blank"><i class='bx bxl-instagram'></i></a>
+            </div>
+        </div>
+    </section>
 
     <script>
-        document.querySelector('.nav-toggle').addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.toggle('active');
+        // Menú hamburguesa
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Modo nocturno/diurno
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            icon.className = theme === 'dark' ? 'bx bx-sun' : 'bx bx-moon';
+        }
+        
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
         });
     </script>
 </body>
